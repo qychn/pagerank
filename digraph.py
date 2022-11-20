@@ -50,7 +50,9 @@ class Digraph:
             self.node_neighbors[node] = []
             self.node_incidence[node] = []
         else:
+            """
             print("Node %s already in digraph" % node)
+            """
 
     def add_nodes(self, nodelist):
         """
@@ -73,6 +75,8 @@ class Digraph:
         """
         u, v = edge
         for n in [u, v]:
+            self.add_node(n)
+
             if not n in self.node_neighbors:
                 print("%s is missing from the node_neighbors table" % n)
             if not n in self.node_incidence:
