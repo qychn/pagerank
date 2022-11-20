@@ -5,15 +5,18 @@ if __name__ == '__main__':
     # 创建一个网络拓朴图
     dg = Digraph()
 
-    dg.add_nodes(["A", "B", "C", "D"])
-    dg.add_edge(("A", "B"))
-    dg.add_edge(("A", "C"))
-    dg.add_edge(("A", "D"))
-    dg.add_edge(("B", "A"))
-    dg.add_edge(("B", "C"))
-    dg.add_edge(("C", "D"))
-    dg.add_edge(("D", "A"))
-    dg.add_edge(("D", "B"))
+    dg.add_nodes(["1", "2", "3", "4", "5", "6"])
+    dg.add_edge(("1", "2"))
+    dg.add_edge(("1", "3"))
+    dg.add_edge(("2", "5"))
+    dg.add_edge(("3", "1"))
+    dg.add_edge(("3", "2"))
+    dg.add_edge(("3", "5"))
+    dg.add_edge(("4", "5"))
+    dg.add_edge(("4", "6"))
+    dg.add_edge(("5", "4"))
+    dg.add_edge(("5", "6"))
+    dg.add_edge(("6", "4"))
 
     page_ranks = pagerank(dg)
 

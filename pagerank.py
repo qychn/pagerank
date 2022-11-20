@@ -1,11 +1,10 @@
-from digraph import Digraph
 
 
-def pagerank(graph, damping_factor=0.85, max_iterations=100, min_delta=0.00001):
+def pagerank(graph, damping_factor=0.85, max_iterations=100, min_delta=0.000001):
     """
     Compute and return the PageRank in a directed graph.
 
-    @type  graph: Digraph
+    @type  graph: digraph.Digraph
     @param graph: Digraph.
 
     @type  damping_factor: number
@@ -25,16 +24,20 @@ def pagerank(graph, damping_factor=0.85, max_iterations=100, min_delta=0.00001):
     graph_size = len(nodes)
     if graph_size == 0:
         return {}
-    min_value = (1.0 - damping_factor) / graph_size  # value for nodes without inbound links
 
-    # itialize the page rank dict with 1/N for all nodes
+    for node in graph.nodes():
+        if len(graph.neighbors(node)) == 0:
+            for node2 in graph.nodes():
+                graph.add_edge((node, node2))
+
+    # initialize the page rank dict with 1/N for all nodes
     pagerank = dict.fromkeys(nodes, 1.0 / graph_size)
 
     for i in range(max_iterations):
         diff = 0  # total difference compared to last iteraction
         # computes each node PageRank based on inbound links
         for node in nodes:
-            rank = min_value
+            rank = (1.0 - damping_factor) / graph_size
             for referring_page in graph.incidents(node):
                 rank += damping_factor * pagerank[referring_page] / len(graph.neighbors(referring_page))
 
