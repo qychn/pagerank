@@ -1,6 +1,7 @@
 from digraph import Digraph
 from pagerank import pagerank
 import datetime
+import operator
 
 if __name__ == '__main__':
     # 创建一个网络拓朴图
@@ -29,4 +30,10 @@ if __name__ == '__main__':
     page_ranks = pagerank(dg)
     end = datetime.datetime.now()
     print(end - start)
-    print("The final page rank is\n", page_ranks)
+    sorted_x = sorted(page_ranks.items(), key=lambda x: x[1], reverse=True)
+    # print("The final page rank is\n", page_ranks)
+
+f = open('output/rank.csv', 'w')
+for name in sorted_x:
+    f.write("%s,%s\n" % (name[0], name[1]))
+f.close()
